@@ -87,7 +87,7 @@
                         
                         <div class="likeBtnWrapper">
                             <div id="count_{{post.id}}" class="likeCountLabel">{{post.like_count}} </div>
-                            <button id="like_{{post.id}}" class="quick_like likeBtn{% if post.liked_by_id %} liked {% endif %} " data-url="{% url 'update_like' %}/{{post.id}}"><i class="fa fa-thumbs-up"></i></button>
+                            <button id="like_{{post.id}}" class="quick_like likeBtn{% if post.liked_by_id %} liked {% endif %} " data-url="{% url 'update_like' %}/{{post.id}}"><i class="fa fa-thumbs-o-up"></i></button>
                         </div>
                         
                     </div>
