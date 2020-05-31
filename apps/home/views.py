@@ -15,7 +15,7 @@ def upload_post(request):
         return redirect('user_home')
 def user_home(request):
     upload_form=uploadForm()
-    query="SELECT up.*,pl.liked_by_id FROM social_user_post AS up LEFT JOIN social_post_like AS pl ON pl.user_post_id=up.id AND pl.liked_by_id={} order by up.id desc"
+    query="SELECT up.*,pl.liked_by_id FROM user_post AS up LEFT JOIN post_like AS pl ON pl.user_post_id=up.id AND pl.liked_by_id={} order by up.id desc"
     query=query.format(request.session['USER_ID'])
     posts_data=User_post.objects.raw(query)
     return render(request,'user_home.html',{'form_upload':upload_form,"user_posts":posts_data})
