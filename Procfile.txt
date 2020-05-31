@@ -1,1 +1,1 @@
-web: gunicorn social_media.wsgi 
+web: gunicorn --pythonpath social_media social_media.wsgi
