@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath social_media social_media.wsgi
+worker: bundle exec rake jobs:work
