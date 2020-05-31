@@ -10,15 +10,11 @@ class User_post(models.Model):
     created_date=models.DateTimeField(auto_now_add=True)
     edit_date=models.DateTimeField(auto_now_add=True)
     like_count=models.IntegerField(default=0)
-    class Meta:
-        db_table  = settings.TABLE_PREFIX+'user_post'
     def __str__(self):
         return self.description
 class Post_like(models.Model):
     user_post=models.ForeignKey(User_post, on_delete=models.CASCADE)
     liked_by=models.ForeignKey(Account_detail, on_delete=models.CASCADE)
     status= models.SmallIntegerField(null=True)
-    class Meta:
-        db_table  = settings.TABLE_PREFIX+'post_like'
     def __str__(self):
         return self.status

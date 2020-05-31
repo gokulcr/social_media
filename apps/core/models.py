@@ -60,8 +60,5 @@ class Account_detail(models.Model):
 	user_first_name         =models.CharField(max_length=30,null=True)
 	phone                   = models.CharField(max_length=30,null=True,blank=True)
 	address                 = models.TextField(null=True)
-	
-	class Meta:
-		db_table  = settings.TABLE_PREFIX+'Account_detail'
 	def _str_(self):
 		return self.user_first_name
