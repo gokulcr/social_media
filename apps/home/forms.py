@@ -14,3 +14,4 @@ class uploadForm(forms.ModelForm):
     class Meta: 
         model =User_post
         fields = ['description','image'] 
+        
