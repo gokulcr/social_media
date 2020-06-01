@@ -226,6 +226,15 @@
         }
     }
     </script>
+    <script>
+        $("#upload_button").on('click',function(){
+            if ($_FILES['image']['size'] == 0)
+            {
+                alert("please select an image");
+            }
+        });
+
+    </script>
 </body>
 
 </html>
