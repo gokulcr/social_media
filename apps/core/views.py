@@ -31,14 +31,16 @@ class Loginview(View):
                     return HttpResponse(e)
                 request.session['USER_NAME'] = user_detail.user_first_name
                 return redirect("user_home")
-@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def signup(request,id=None):
     if id:
-        User = get_user_model()
-        user_detail_obj=Account_detail.objects.get(id=id)
-        user_obj = User.objects.get(id=user_detail_obj.Account_id)
-        form_user_master=User_master_form(request.POST or None,instance=user_obj)
-        form_user_detail=User_detail_form(request.POST or None,instance=user_detail_obj)
+        if request.session['USER_ID']:
+            User = get_user_model()
+            user_detail_obj=Account_detail.objects.get(id=id)
+            user_obj = User.objects.get(id=user_detail_obj.Account_id)
+            form_user_master=User_master_form(request.POST or None,instance=user_obj)
+            form_user_detail=User_detail_form(request.POST or None,instance=user_detail_obj)
+        else:
+            return redirect('Renders Login Page')
     else:
         form_user_master=User_master_form(request.POST or None)
         form_user_detail=User_detail_form(request.POST or None)
