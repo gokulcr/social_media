@@ -229,8 +229,10 @@
     <script>
         $("#upload_button").on('click',function(){
           
+            if ($('#upload').get(0).files.length === 0) 
+            {
                 alert("please select an image");
-            
+            }
         });
 
     </script>
