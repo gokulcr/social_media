@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.views import View 
+from django.views.decorators.cache import cache_control
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
@@ -30,7 +31,7 @@ class Loginview(View):
                     return HttpResponse(e)
                 request.session['USER_NAME'] = user_detail.user_first_name
                 return redirect("user_home")
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def signup(request,id=None):
     if id:
         User = get_user_model()
