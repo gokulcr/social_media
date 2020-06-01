@@ -72,9 +72,9 @@
 
                                 <div class="title h5">
 
-                                    <a href="#" class="post-user-name">{{post.created_by.user_first_name}}</a>
+                                    <a href="#" class="post-user-name">{% if request.session.USER_ID == post.created_by_id %}You {% else %}{{post.created_by.user_first_name}}{%endif%}</a>
 
-                                    has updated his status.
+                                     updated a  status.
 
                                 </div>
 
