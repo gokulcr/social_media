@@ -31,36 +31,20 @@ class Loginview(View):
                     return HttpResponse(e)
                 request.session['USER_NAME'] = user_detail.user_first_name
                 return redirect("user_home")
-def signup(request,id=None):
-    if id:
-        if request.session['USER_ID']:
-            User = get_user_model()
-            user_detail_obj=Account_detail.objects.get(id=id)
-            user_obj = User.objects.get(id=user_detail_obj.Account_id)
-            form_user_master=User_master_form(request.POST or None,instance=user_obj)
-            form_user_detail=User_detail_form(request.POST or None,instance=user_detail_obj)
-        else:
-            return redirect('Renders Login Page')
-    else:
-        form_user_master=User_master_form(request.POST or None)
-        form_user_detail=User_detail_form(request.POST or None)
+def signup(request):
+    form_user_master=User_master_form(request.POST or None)
+    form_user_detail=User_detail_form(request.POST or None)
     if form_user_master.is_valid() and form_user_detail.is_valid():
         account_obj = form_user_master.save(commit=False)
-        if not id:
-            account_obj.is_active = True
-            account_obj.password_reset = True
-            account_obj.type_of_user = 2
-            account_obj.set_password(form_user_master.cleaned_data.get('password'))
+        account_obj.is_active = True
+        account_obj.password_reset = True
+        account_obj.type_of_user = 2
+        account_obj.set_password(form_user_master.cleaned_data.get('password'))
         account_obj.save()
         account_detail_obj = form_user_detail.save(commit=False)
         account_detail_obj.Account = account_obj
         account_detail_obj.save()
-        if not id:
-            messages.success(request, 'Please login to continue')
-            return redirect('Renders Login Page')
-        else:
-             messages.success(request, 'updated')
-             return redirect("user_home")
-
+        messages.success(request, 'Please login to continue')
+        return redirect('Renders Login Page')
     return render(request, 'add_user.html', {"form_user_master":form_user_master,"form_user_detail":form_user_detail})
 
